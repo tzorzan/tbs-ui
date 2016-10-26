@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  tbsServiceUrl: "https://iks-tbs.herokuapp.com"
 };

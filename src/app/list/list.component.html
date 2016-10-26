@@ -1,0 +1,13 @@
+<section class="main" *ngIf="queue">
+  <ul class="tbslist">
+    <li *ngFor="let person of queue" class="">
+      <div class="view">
+        <label>{{person}}</label>
+        <button class="destroy" (click)="remove(person)"></button>
+      </div>
+    </li>
+  </ul>
+</section>
+<footer class="footer" *ngIf="queue && queue.length > 0">
+  <span class="todo-count"><strong>{{queue.length}}</strong> {{queue.length == 1 ? 'person' : 'persons'}} left</span>
+</footer>

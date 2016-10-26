@@ -1,3 +1,22 @@
-<h1>
-  {{title}}
-</h1>
+<section class="tbsapp" *ngIf="status">
+  <header>
+    <h1><strong>T</strong><small>oilet</small> <strong>B</strong><small>ooking</small> <strong>S</strong><small>ystem</small></h1>
+    <app-status [status]="status"></app-status>
+  </header>
+
+  <section class="tbsqueue">
+    <header>
+      <app-input (onBook)="onBook($event)"></app-input>
+    </header>
+
+    <app-list [queue]="status.queue | slice:1" (onRemove)="onRemove($event)"></app-list>
+
+  </section>
+</section>
+
+<footer class="info">
+  <p>Type your name to book.</p>
+  <p>
+    Created by <a href="http://github.com/tzorzan">tzorzan</a> using <a href="http://angular.io">Angular2</a>
+  </p>
+</footer>

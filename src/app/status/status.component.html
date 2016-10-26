@@ -1,0 +1,6 @@
+<div class="tbsdoor"></div>
+<h3>
+  <strong>{{status.state}}</strong>
+  <span *ngIf="status.state === 'WAITING' && status.queue && status.queue.length">for <strong>{{status.queue[0]}}</strong></span>
+  <span *ngIf="status.countdown"> [ {{status.countdown}} ]</span>
+</h3>
