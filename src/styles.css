@@ -229,6 +229,13 @@ input[type="checkbox"] {
   margin-bottom: -1px;
 }
 
+.tbsswitch {
+  position: absolute;
+  top: 1em;
+  right: 6em;
+}
+
+
 .footer {
   color: #777;
   padding: 10px 15px;

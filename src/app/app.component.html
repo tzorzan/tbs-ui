@@ -8,10 +8,12 @@
     <header>
       <app-input (onBook)="onBook($event)"></app-input>
     </header>
-
     <app-list [queue]="status.queue | slice:1" (onRemove)="onRemove($event)"></app-list>
-
   </section>
+</section>
+
+<section class="tbsswitch">
+  <app-switch></app-switch>
 </section>
 
 <footer class="info">

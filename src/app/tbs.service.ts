@@ -17,6 +17,8 @@ export class TBSService {
   private statusUrl = '/status';
   private queueUrl = '/queue';
   private dequeUrl = '/dequeue';
+  private enterUrl = '/enter';
+  private exitUrl = '/exit';
   private statusUpdatedSource = new Subject<Status>();
 
   statusUpdated$ = this.statusUpdatedSource.asObservable();
@@ -30,16 +32,6 @@ export class TBSService {
         me.statusUpdatedSource.next(JSON.parse(status.body));
       });
     });
-  }
-
-  getStatus(): Promise<Status> {
-    console.debug("Updating status from server ...");
-
-    return this.http.get(this.tbsUrl + this.statusUrl)
-      .toPromise()
-      .then(response => response.json() as Status)
-      .catch(this.handleError);
-
   }
 
   bookPerson(person: string): Promise<string> {
@@ -61,6 +53,24 @@ export class TBSService {
     param.set("name", person);
 
     return this.http.post(this.tbsUrl + this.dequeUrl + "?" + param.toString(), {})
+      .toPromise()
+      .then(response => response.text())
+      .catch(this.handleError);
+  }
+
+  enter(): Promise<string> {
+    console.debug("Enter.");
+
+    return this.http.post(this.tbsUrl + this.enterUrl, {})
+      .toPromise()
+      .then(response => response.text())
+      .catch(this.handleError);
+  }
+
+  exit(): Promise<string> {
+    console.debug("Exit.");
+
+    return this.http.post(this.tbsUrl + this.exitUrl, {})
       .toPromise()
       .then(response => response.text())
       .catch(this.handleError);

@@ -8,6 +8,7 @@ import { InputComponent } from './input/input.component';
 import { ListComponent } from './list/list.component';
 import { StatusComponent } from './status/status.component';
 import { TimerPipe } from './timer.pipe';
+import { SwitchComponent } from './switch/switch.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { TimerPipe } from './timer.pipe';
     InputComponent,
     ListComponent,
     StatusComponent,
-    TimerPipe
+    TimerPipe,
+    SwitchComponent
   ],
   imports: [
     BrowserModule,
