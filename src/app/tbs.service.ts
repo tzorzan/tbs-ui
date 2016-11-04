@@ -1,5 +1,9 @@
 import {Injectable} from '@angular/core';
 import {Http, URLSearchParams} from '@angular/http';
+import { Subject } from 'rxjs/Subject';
+
+let SockJS = require('sockjs-client');
+let Stomp = require('stompjs');
 
 import 'rxjs/add/operator/toPromise';
 
@@ -9,11 +13,24 @@ import {environment} from "../environments/environment";
 @Injectable()
 export class TBSService {
   private tbsUrl = environment.tbsServiceUrl;
+  private websocketUrl = '/tbs-websocket';
   private statusUrl = '/status';
   private queueUrl = '/queue';
   private dequeUrl = '/dequeue';
+  private statusUpdatedSource = new Subject<Status>();
 
-  constructor(private http: Http) { }
+  statusUpdated$ = this.statusUpdatedSource.asObservable();
+
+  constructor(private http: Http) {
+    let me = this;
+    let socket = new SockJS(this.tbsUrl + this.websocketUrl);
+    let stompClient = Stomp.over(socket);
+    stompClient.connect({}, function (frame) {
+      stompClient.subscribe('/topic/status', function (status) {
+        me.statusUpdatedSource.next(JSON.parse(status.body));
+      });
+    });
+  }
 
   getStatus(): Promise<Status> {
     console.debug("Updating status from server ...");

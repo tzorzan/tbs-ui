@@ -22,30 +22,18 @@ export class AppComponent {
   constructor(private tbsService: TBSService) {}
 
   ngOnInit(): void {
-    this.tbsService.getStatus().then( (status) => {
-      this.status = status;
-      //TODO: polling using Observables
-      //TODO: enhance with WebSockets
-      setTimeout(() => this.ngOnInit(), 5000);
-    });
-
-  }
-
-  updateStatus(): void {
-    this.tbsService.getStatus().then( (status) => {
-      this.status = status;
-    });
+    this.tbsService.statusUpdated$.subscribe(
+      status => {
+        this.status = status;
+      }
+    );
   }
 
   onBook(person: string) {
-    this.tbsService.bookPerson(person).then( () => {
-      this.updateStatus();
-    });
+    this.tbsService.bookPerson(person);
   }
 
   onRemove(person: string) {
-    this.tbsService.removePerson(person).then( () => {
-      this.updateStatus();
-    });
+    this.tbsService.removePerson(person);
   }
 }
