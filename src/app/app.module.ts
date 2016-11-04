@@ -7,13 +7,15 @@ import { AppComponent } from './app.component';
 import { InputComponent } from './input/input.component';
 import { ListComponent } from './list/list.component';
 import { StatusComponent } from './status/status.component';
+import { TimerPipe } from './timer.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     InputComponent,
     ListComponent,
-    StatusComponent
+    StatusComponent,
+    TimerPipe
   ],
   imports: [
     BrowserModule,
